@@ -14,7 +14,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import { toast } from "react-toastify";
 
 const CartPage = () => {
-  const [msg, setMsg] = useState("");
+  const [msg] = useState("");
   const dispatch = useDispatch();
   const {
     data: cartProducts,
