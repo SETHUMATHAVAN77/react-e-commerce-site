@@ -5,11 +5,13 @@ import { setIsModalVisible } from "../../store/modalSlice";
 import { addToCart } from "../../store/cartSlice";
 import { useNavigate } from "react-router-dom";
 import { formatPrice } from "../../utils/helpers";
+import { toast } from "react-toastify";
 
 const SingleProduct = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [qty, setQty] = useState(1);
+  const [setMsg] = useState("");
 
   const { data: product } = useSelector((state) => state.modal);
 
@@ -40,6 +42,7 @@ const SingleProduct = () => {
     dispatch(addToCart(tempProduct));
     dispatch(setIsModalVisible(false));
     navigate("/cart");
+    setMsg(toast.success("Item Added successfully...!"));
   };
 
   const modalOverlayHandler = (e) => {
@@ -105,7 +108,9 @@ const SingleProduct = () => {
                 <span className="btn-icon">
                   <i className="fas fa-cart-shopping"></i>
                 </span>
-                <span className="btn-text">Add To Cart</span>
+                <span className="px-5 py-3 font-semibold rounded-xl bg-slate-600 text-white cursor-pointer">
+                  Add To Cart
+                </span>
               </button>
             </div>
           </div>

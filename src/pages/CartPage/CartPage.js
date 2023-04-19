@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./CartPage.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
@@ -11,8 +11,10 @@ import {
 import { formatPrice } from "../../utils/helpers";
 import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
+import { toast } from "react-toastify";
 
 const CartPage = () => {
+  const [msg, setMsg] = useState("");
   const dispatch = useDispatch();
   const {
     data: cartProducts,
@@ -27,6 +29,10 @@ const CartPage = () => {
   }, [useSelector((state) => state.cart)]);
 
   const emptyCartMsg = <h4 className="text-red fw-6">No items found!</h4>;
+
+  const messageHandler = (msg) => {
+    msg.setMsg(toast.success("Order Placed Successfully...!"));
+  };
 
   return (
     <>
@@ -139,7 +145,7 @@ const CartPage = () => {
                   </div>
                   <button
                     type="button"
-                    className="btn-danger"
+                    className="btn-danger px-5 py-3 font-semibold rounded-xl bg-slate-500 text-white cursor-pointer"
                     onClick={() => dispatch(clearCart())}
                   >
                     <span className="fs-16">Clear Cart</span>
@@ -179,7 +185,11 @@ const CartPage = () => {
                       </span>
                     </div>
                     <div className="cart-summary-btn">
-                      <button type="button" className="btn-secondary">
+                      <button
+                        type="button"
+                        className="px-5 py-3 font-semibold rounded-xl bg-slate-500 text-white cursor-pointer"
+                        onClick={() => messageHandler(msg)}
+                      >
                         Proceed to Checkout
                       </button>
                     </div>

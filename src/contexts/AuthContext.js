@@ -11,7 +11,22 @@ import {
 const AuthContext = createContext();
 
 const AuthContextProvider = ({ children }) => {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(null);
+  const [imageAsset, setImageAsset] = useState(null);
+  const [userName, setUserName] = useState("");
+  const [email, setEmail] = useState("");
+  const [number, setNumber] = useState("");
+  const [address, setAddress] = useState("");
+  const [docId, setDocId] = useState(null);
+  const [userId, setUserId] = useState(null);
+
+  const clearUserData = () => {
+    setImageAsset(null);
+    setUserName("");
+    setEmail("");
+    setNumber("");
+    setAddress("");
+  };
 
   // signUp
   const signUp = (email, password) => {
@@ -25,12 +40,17 @@ const AuthContextProvider = ({ children }) => {
 
   // logOut
   const logOut = () => {
+    clearUserData();
     return signOut(auth);
   };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
+      if (currentUser) {
+        setUser(currentUser);
+      } else {
+        setUser(null);
+      }
     });
     return () => {
       unsubscribe();
@@ -38,7 +58,28 @@ const AuthContextProvider = ({ children }) => {
   });
 
   return (
-    <AuthContext.Provider value={{ signUp, user, logIn, logOut }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        signUp,
+        logIn,
+        logOut,
+        userName,
+        setUserName,
+        email,
+        setEmail,
+        number,
+        setNumber,
+        address,
+        setAddress,
+        imageAsset,
+        setImageAsset,
+        docId,
+        setDocId,
+        userId,
+        setUserId,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from "react";
 import "./Navbar.scss";
+import Tooltip from "react-bootstrap/Tooltip";
+import { OverlayTrigger } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchCategories } from "../../store/categorySlice";
 import { getCartTotal } from "../../store/cartSlice";
+import userLogo from "../../assets/images/user.jpg";
+// alert
+import { UserAuth } from "../../contexts/AuthContext";
+import { ToastContainer } from "react-toastify";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -11,6 +17,18 @@ const Navbar = () => {
   const { totalItems } = useSelector((state) => state.cart);
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const { user, imageAsset } = UserAuth();
+
+  const renderTooltip = (props) => (
+    <Tooltip
+      className="text-white bg-black/20 ml-2 px-3 py-1 rounded-lg text-xs md:text-base mr-2"
+      id="button-tooltip"
+      {...props}
+    >
+      Profile
+    </Tooltip>
+  );
 
   useEffect(() => {
     dispatch(fetchCategories());
@@ -27,6 +45,7 @@ const Navbar = () => {
               <span className="text-regal-blue">Shopping</span>
               <span className="text-gold">Hub.</span>
             </Link>
+            <ToastContainer position="top-right" />
 
             <form className="navbar-search flex">
               <input type="text" placeholder="Search here ..." />
@@ -45,6 +64,22 @@ const Navbar = () => {
                   <span className="cart-count-value">{totalItems}</span>
                 </div>
               </Link>
+
+              <OverlayTrigger
+                placement="left"
+                delay={{ show: 200, hide: 100 }}
+                overlay={renderTooltip}
+              >
+                <div>
+                  <Link to={`/userinfo/${user?.uid}`}>
+                    <img
+                      src={`${imageAsset ? imageAsset : userLogo}`}
+                      alt="user-logo"
+                      className="w-[40px] h-[40px] rounded-full"
+                    />
+                  </Link>
+                </div>
+              </OverlayTrigger>
 
               <Link
                 to={"/"}

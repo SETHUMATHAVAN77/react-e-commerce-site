@@ -26,16 +26,21 @@ const SignUp = () => {
     <>
       <div>
         <div className="w-full h-screen  bg-slate-600 in">
+          <img
+            src="https://res.cloudinary.com/doqmdeqem/image/upload/v1681734978/shopping-07_ybrwko.jpg"
+            alt="bg"
+            className="fixed w-full"
+          />
           <div className="fixed w-full px-4 py-14 z-50 ">
             <div className="max-w-[450px] h-[450px] mx-auto bg-black/80 text-white rounded-md shadow-xl">
               <div className="max-w-[320px] mx-auto py-16 px-2 md:px-0">
                 <div className="logo-login text-center ">
                   <img
-                    src="https://res.cloudinary.com/daxmjqsy2/image/upload/v1679395171/logo_q8a29a.png"
+                    src="https://res.cloudinary.com/doqmdeqem/image/upload/v1677313332/samples/ecommerce/accessories-bag.jpg"
                     alt="logo"
                     className="w-[90px] h-[50px] mx-auto rounded-xl"
                   />
-                  <h1 className="text-4xl font-bold">Shopping Cart</h1>
+                  <h1 className="text-4xl text-red font-bold">Shopping Hub</h1>
                 </div>
                 <h1 className="text-3xl font-bold">Sign Up</h1>
                 {error ? <small className="text-red-500">{error}</small> : null}
@@ -61,7 +66,7 @@ const SignUp = () => {
                   />
                   <button
                     type="submit"
-                    className="bg-gray-600 py-3 my-6 rounded font-semibold hover:bg-slate-600 transition-all duration-300"
+                    className="bg-gray-600 px-2 py-3 my-6 rounded font-semibold hover:bg-slate-600 text-red transition-all duration-300"
                   >
                     Sign Up
                   </button>
