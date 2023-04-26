@@ -25,7 +25,6 @@ const CartPage = () => {
 
   useEffect(() => {
     dispatch(getCartTotal());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [useSelector((state) => state.cart)]);
 
   const emptyCartMsg = <h4 className="text-red fw-6">No items found!</h4>;
@@ -186,11 +185,12 @@ const CartPage = () => {
                     </div>
                     <div className="cart-summary-btn">
                       <button
-                        type="button"
                         className="px-5 py-3 font-semibold rounded-xl bg-slate-500 text-white cursor-pointer"
-                        onClick={() => messageHandler(msg)}
+                        onMouseEnter={() => messageHandler(msg)}
                       >
-                        Proceed to Checkout
+                        <Link to="/home" onClick={() => dispatch(clearCart())}>
+                          Proceed to Checkout
+                        </Link>
                       </button>
                     </div>
                   </div>
