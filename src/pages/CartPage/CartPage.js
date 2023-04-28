@@ -25,6 +25,7 @@ const CartPage = () => {
 
   useEffect(() => {
     dispatch(getCartTotal());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [useSelector((state) => state.cart)]);
 
   const emptyCartMsg = <h4 className="text-red fw-6">No items found!</h4>;

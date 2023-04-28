@@ -16,6 +16,7 @@ import { UserAuth } from "./contexts/AuthContext";
 // firebase
 import { db } from "./utils/firebase";
 import { collection, getDocs, query, where } from "firebase/firestore";
+import { useEffect } from "react";
 
 const App = () => {
   const {
@@ -53,6 +54,12 @@ const App = () => {
       });
     }
   };
+
+  useEffect(() => {
+    fetchUserDetails();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user, user?.uid]);
+
   return (
     <div className="App">
       <Provider store={store}>
