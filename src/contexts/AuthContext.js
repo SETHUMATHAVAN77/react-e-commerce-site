@@ -30,6 +30,7 @@ const AuthContextProvider = ({ children }) => {
 
   // signUp
   const signUp = (email, password) => {
+    clearUserData();
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
@@ -52,18 +53,17 @@ const AuthContextProvider = ({ children }) => {
         setUser(null);
       }
     });
-    return () => {
-      unsubscribe();
-    };
-  });
+
+    return unsubscribe;
+  }, []);
 
   return (
     <AuthContext.Provider
       value={{
-        user,
         signUp,
         logIn,
         logOut,
+        user,
         userName,
         setUserName,
         email,

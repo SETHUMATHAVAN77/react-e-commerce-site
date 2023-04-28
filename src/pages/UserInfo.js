@@ -4,7 +4,6 @@ import { MdDone } from "react-icons/md";
 import { Link } from "react-router-dom";
 import profile from "../assets/images/user.jpg";
 import { UserAuth } from "../contexts/AuthContext";
-
 const UserInfo = ({ fetchUserDetails }) => {
   const { user, userName, email, number, address, imageAsset, docId, userId } =
     UserAuth();
@@ -22,7 +21,7 @@ const UserInfo = ({ fetchUserDetails }) => {
             <>
               <div className="-mt-16">
                 <img
-                  src={`${imageAsset ? imageAsset : profile}`}
+                  src={`${imageAsset || profile}`}
                   alt="profile"
                   className="w-[100px] h-[100px] rounded-full mx-auto"
                 />

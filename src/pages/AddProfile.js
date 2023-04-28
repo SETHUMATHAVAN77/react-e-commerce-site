@@ -103,6 +103,7 @@ const AddProfile = () => {
           await addDoc(collection(db, "userInfo"), {
             userName: userName,
             email: email,
+            image: imageAsset,
             number: number,
             address: address,
             userId: user.uid,
@@ -117,6 +118,7 @@ const AddProfile = () => {
           await updateDoc(doc(db, "userInfo", id), {
             userName: userName,
             email: email,
+            image: imageAsset,
             number: number,
             address: address,
             userId: user.uid,
