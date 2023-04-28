@@ -26,7 +26,7 @@ const CategoryPage = () => {
           <div className="breadcrumb">
             <ul className="breadcrumb-items flex">
               <li className="breadcrumb-item">
-                <Link to="/">
+                <Link to="/home">
                   <i className="fas fa-home"></i>
                   <span className="breadcrumb-separator">
                     <i className="fas fa-chevron-right"></i>
