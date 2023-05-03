@@ -17,6 +17,8 @@ import { UserAuth } from "./contexts/AuthContext";
 import { db } from "./utils/firebase";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { useEffect } from "react";
+import OrderHistory from "./pages/OrderHistory";
+import { ToastContainer } from "react-toastify";
 
 const App = () => {
   const {
@@ -64,6 +66,7 @@ const App = () => {
     <div className="App">
       <Provider store={store}>
         <BrowserRouter>
+          <ToastContainer position="top-right" />
           <Routes>
             <Route path="/" element={<SignIn />} />
             <Route path="/signup" element={<SignUp />} />
@@ -73,6 +76,7 @@ const App = () => {
             />
             <Route path="/category/:id" element={<Category />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/orders" element={<OrderHistory />} />
             <Route
               path="/userinfo/:id"
               element={<UserInfo fetchUserDetails={fetchUserDetails} />}

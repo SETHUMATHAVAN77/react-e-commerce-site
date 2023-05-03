@@ -10,6 +10,10 @@ import {
 // create context
 const AuthContext = createContext();
 
+let orderData = localStorage.getItem("orders")
+  ? JSON.parse(localStorage.getItem("orders"))
+  : [];
+
 const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [imageAsset, setImageAsset] = useState(null);
@@ -19,6 +23,14 @@ const AuthContextProvider = ({ children }) => {
   const [address, setAddress] = useState("");
   const [docId, setDocId] = useState(null);
   const [userId, setUserId] = useState(null);
+  // order state
+  const [orders, setOrders] = useState(orderData);
+  const [orderTotal, setOrderTotal] = useState(0);
+
+  // localstorage set item
+  useEffect(() => {
+    localStorage.setItem("orders", JSON.stringify(orders));
+  }, [orders]);
 
   const clearUserData = () => {
     setImageAsset(null);
@@ -27,6 +39,13 @@ const AuthContextProvider = ({ children }) => {
     setNumber("");
     setAddress("");
   };
+
+  useEffect(() => {
+    const orderTotal = orders.reduce((accumulator, currentItem) => {
+      return accumulator + currentItem.price * currentItem.quantity;
+    }, 0);
+    setOrderTotal(orderTotal);
+  }, [orders]);
 
   // signUp
   const signUp = (email, password) => {
@@ -78,6 +97,10 @@ const AuthContextProvider = ({ children }) => {
         setDocId,
         userId,
         setUserId,
+        orders,
+        setOrders,
+        orderTotal,
+        setOrderTotal,
       }}
     >
       {children}

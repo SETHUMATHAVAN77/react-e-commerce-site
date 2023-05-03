@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./CartPage.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
@@ -12,9 +12,9 @@ import { formatPrice } from "../../utils/helpers";
 import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/Navbar/Navbar";
 import { toast } from "react-toastify";
+import { UserAuth } from "../../contexts/AuthContext";
 
 const CartPage = () => {
-  const [msg] = useState("");
   const dispatch = useDispatch();
   const {
     data: cartProducts,
@@ -23,6 +23,8 @@ const CartPage = () => {
     deliveryCharge,
   } = useSelector((state) => state.cart);
 
+  const { orders, setOrders } = UserAuth();
+
   useEffect(() => {
     dispatch(getCartTotal());
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -30,8 +32,14 @@ const CartPage = () => {
 
   const emptyCartMsg = <h4 className="text-red fw-6">No items found!</h4>;
 
-  const messageHandler = (msg) => {
-    msg.setMsg(toast.success("Order Placed Successfully...!"));
+  // const messageHandler = (msg) => {
+  //   msg.setMsg(toast.success("Order Placed Successfully...!"));
+  // };
+
+  const checkOutHandler = () => {
+    toast.success("Order Placed Successfully...!");
+    dispatch(clearCart());
+    setOrders([...cartProducts, ...orders]);
   };
 
   return (
@@ -185,14 +193,15 @@ const CartPage = () => {
                       </span>
                     </div>
                     <div className="cart-summary-btn">
-                      <button
-                        className="px-5 py-3 font-semibold rounded-xl bg-slate-500 text-white cursor-pointer"
-                        onMouseEnter={() => messageHandler(msg)}
-                      >
-                        <Link to="/home" onClick={() => dispatch(clearCart())}>
+                      <Link to="/home">
+                        <button
+                          className="px-5 py-3 font-semibold rounded-xl bg-slate-500 text-white cursor-pointer"
+                          // onMouseEnter={() => messageHandler(msg)}
+                          onClick={checkOutHandler}
+                        >
                           Proceed to Checkout
-                        </Link>
-                      </button>
+                        </button>
+                      </Link>
                     </div>
                   </div>
                 </div>

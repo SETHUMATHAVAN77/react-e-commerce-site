@@ -7,9 +7,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchCategories } from "../../store/categorySlice";
 import { getCartTotal } from "../../store/cartSlice";
 import userLogo from "../../assets/images/user.jpg";
+import Order from "../../assets/images/icons8-mobile-order-100.png";
 // alert
 import { UserAuth } from "../../contexts/AuthContext";
-import { ToastContainer } from "react-toastify";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -30,6 +30,16 @@ const Navbar = () => {
     </Tooltip>
   );
 
+  const orderTooltip = (props) => (
+    <Tooltip
+      className="text-white bg-black/20 ml-2 px-3 py-1 rounded-lg text-xs md:text-base mr-2"
+      id="button-tooltip"
+      {...props}
+    >
+      Orders
+    </Tooltip>
+  );
+
   useEffect(() => {
     dispatch(fetchCategories());
     dispatch(getCartTotal());
@@ -45,8 +55,6 @@ const Navbar = () => {
               <span className="text-regal-blue">Shopping</span>
               <span className="text-gold">Hub.</span>
             </Link>
-            <ToastContainer position="top-right" />
-
             <form className="navbar-search flex">
               <input type="text" placeholder="Search here ..." />
               <button type="submit" className="navbar-search-btn">
@@ -55,6 +63,18 @@ const Navbar = () => {
             </form>
 
             <div className="navbar-btns flex gap-x-5">
+              <Link to={"/orders"}>
+                <OverlayTrigger
+                  placement="left"
+                  delay={{ show: 200, hide: 100 }}
+                  overlay={orderTooltip}
+                >
+                  <div className="w-[40px] h-[40px] ">
+                    <img src={Order} alt="order" />
+                  </div>
+                </OverlayTrigger>
+              </Link>
+
               <Link to="/cart" className="add-to-cart-btn flex">
                 <span className="btn-ico">
                   <i className="fas fa-shopping-cart"></i>

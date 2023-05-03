@@ -38,7 +38,6 @@ const AddProfile = () => {
     setAddress,
     imageAsset,
     setImageAsset,
-    setIsDone,
   } = UserAuth();
 
   const { id } = useParams();
@@ -108,7 +107,6 @@ const AddProfile = () => {
             address: address,
             userId: user.uid,
           });
-          setIsDone(true);
           toast.success("Profile Added Successfully");
         } catch (error) {
           console.log(error);
@@ -123,7 +121,6 @@ const AddProfile = () => {
             address: address,
             userId: user.uid,
           });
-          setIsDone(true);
           toast.success("Profile Updated Successfully");
         } catch (error) {
           console.log(error);

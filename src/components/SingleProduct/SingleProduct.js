@@ -11,7 +11,6 @@ const SingleProduct = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [qty, setQty] = useState(1);
-  const [setMsg] = useState("");
 
   const { data: product } = useSelector((state) => state.modal);
 
@@ -42,7 +41,7 @@ const SingleProduct = () => {
     dispatch(addToCart(tempProduct));
     dispatch(setIsModalVisible(false));
     navigate("/cart");
-    setMsg(toast.success("Item Added successfully...!"));
+    toast.success("Item Added successfully...!");
   };
 
   const modalOverlayHandler = (e) => {
