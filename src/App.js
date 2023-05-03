@@ -78,7 +78,7 @@ const App = () => {
             <Route path="/cart" element={<Cart />} />
             <Route path="/orders" element={<OrderHistory />} />
             <Route
-              path="/userinfo/:id"
+              path="/userinfo"
               element={<UserInfo fetchUserDetails={fetchUserDetails} />}
             />
             <Route path="/addprofile" element={<AddProfile />} />

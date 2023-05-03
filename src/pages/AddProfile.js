@@ -126,7 +126,7 @@ const AddProfile = () => {
           console.log(error);
         }
       }
-      navigate(`/userinfo/${user.uid}`);
+      navigate(`/userinfo`);
     } else {
       toast.error("All fields are mendatory to fill");
     }
