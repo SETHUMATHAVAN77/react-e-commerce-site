@@ -91,7 +91,7 @@ const Navbar = () => {
                 overlay={renderTooltip}
               >
                 <div>
-                  <Link to={`/userinfo`}>
+                  <Link to={`/userinfo/${user?.uid}`}>
                     <img
                       src={`${imageAsset ? imageAsset : userLogo}`}
                       alt="user-logo"

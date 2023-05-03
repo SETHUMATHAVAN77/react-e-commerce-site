@@ -12,8 +12,11 @@ import {
 import "./HomePage.scss";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
+import { UserAuth } from "../../contexts/AuthContext";
 
 const HomePage = () => {
+  const { user, fetchUserDetails } = UserAuth();
+
   const dispatch = useDispatch();
   const { data: categories, status: categoryStatus } = useSelector(
     (state) => state.category
@@ -30,6 +33,11 @@ const HomePage = () => {
     dispatch(fetchProductsByCategory(2, "all"));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    fetchUserDetails();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user, user?.uid]);
 
   return (
     <div className="home-page">

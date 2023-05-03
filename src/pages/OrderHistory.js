@@ -1,7 +1,6 @@
 import React from "react";
 import { AiFillHome } from "react-icons/ai";
 import OrderedProduct from "../components/OrderedProduct";
-// import OrderedUser from "../components/OrderedUser";
 import { Link } from "react-router-dom";
 import { UserAuth } from "../contexts/AuthContext";
 
@@ -104,7 +103,6 @@ const OrderHistory = () => {
                 </div>
               </div>
             </div>
-            {/* <OrderedUser /> */}
           </div>
         </div>
       )}
